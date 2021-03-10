@@ -444,6 +444,7 @@ class ExplainerBase:
 
         elif self.model.model_type == 'regressor':
             self.target_cf_range = self.infer_target_cfs_range(desired_range)
+        return desired_class
 
     def infer_target_cfs_class(self, desired_class_input, original_pred,
             num_output_nodes):
@@ -465,7 +466,7 @@ class ExplainerBase:
             if desired_class_input >= 0 and desired_class_input < num_output_nodes:
                 target_class = desired_class_input
             else:
-                raise ValueError("Desired class should be within 0 and num_classes-1.")
+                raise ValueError("Desired class not present in training data!")
         return target_class
 
     def infer_target_cfs_range(self, desired_range_input):
